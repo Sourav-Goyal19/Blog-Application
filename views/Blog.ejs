@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+        <title>
+            <%= blog.title %>
+        </title>
+</head>
+
+<body data-bs-theme="dark">
+    <%- include('./partials/nav.ejs') %>
+        <div class="container mt-5">
+            <% if (locals.blog) { %>
+                <div class="card mb-3 border border-success border-2">
+                    <img src="<%= blog.coverImage %>" class="card-img-top" alt="<%= blog.coverImage %>">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= blog.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%= blog.body %>
+                        </p>
+                        <p class="card-text">Created By -
+                            <small class="text-body-secondary">
+                                <%= blogUser.fullName %>
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                <form action="/comment/new/<%= blog._id %>" method="post" class="mb-3">
+                    <div class="form-group">
+                        <label for="content">Add Your Comment</label>
+                        <textarea class="form-control mt-2" name="content" id="content" rows="3"
+                            placeholder="Your comment..."></textarea>
+                    </div>
+                    <button type="submit" <% if (!locals.fullName) { %>
+                        disabled
+                        <% } %> class="btn btn-primary mt-3">Add Comment
+                    </button>
+                </form>
+                <% if (locals.blogComments) { %>
+                    <div class="mb-5 p-3 rounded border border-info border-2">
+                        <h4>Comments</h4>
+                        <% blogComments.forEach(comment=> { %>
+                            <div style="display: flex; gap: 10px;" class="comment">
+                                <div class="media">
+                                    <img src="<%=comment.createdBy.profileImageUrl%>"
+                                        class="mr-3 rounded-circle border border-info"
+                                        alt="<%= comment.createdBy.fullName %>"
+                                        style="width: 40px;overflow: hidden;object-fit: contain; height: 40px;">
+                                </div>
+                                <div class="media-body">
+                                    <h6 class="mt-0 text-capitalize">
+                                        <%= comment.createdBy.fullName %>
+                                    </h6>
+                                    <p style="margin-top: -8px; line-height: 1.2;">
+                                        <%= comment.content %>
+                                    </p>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% } %>
+                        <% } %>
+        </div>
+        <%- include('./partials/script.ejs') %>
+</body>
+
+</html>

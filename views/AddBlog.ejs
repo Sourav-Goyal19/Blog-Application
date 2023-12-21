@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+        <title>Add Blog</title>
+</head>
+
+<body data-bs-theme="dark">
+    <%- include('./partials/nav.ejs') %>
+        <div class="container mt-4">
+            <form action="/blog/create" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control"
+                        value="<% if (locals.formOldData) { %><%= formOldData?.title ?? '' %><% } %>" name="title"
+                        aria-describedby="title">
+                </div>
+                <div class="mb-3">
+                    <label for="body">Body</label>
+                    <textarea class="form-control mt-2" name="body"
+                        id="body"><% if (locals.formOldData) { %><%= formOldData?.body ?? '' %><% } %></textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" name="coverImage" id="coverImage">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <% if (locals.msg) { %>
+                <h3 class="mt-4">
+                    <%= msg %>
+                </h3>
+                <% } %>
+        </div>
+        <%- include('./partials/script.ejs') %>
+</body>
+
+</html>

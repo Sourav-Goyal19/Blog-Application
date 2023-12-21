@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+        <title>Blog</title>
+</head>
+
+<body data-bs-theme="dark">
+    <%- include('./partials/nav.ejs') %>
+        <div class="container mt-5">
+            <% if (locals.fullName) { %>
+                <form action="/user/profile" method="post" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <input type="file" required class="form-control" name="profileImageUrl" id="coverImage">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Profile</button>
+                </form>
+                <img src="<%= profileImageUrl %>" class="img-fluid border rounded mt-5" alt="...">
+                <% } else { %>
+                    <p class="h1 text-center mt-5">Please Login First
+                        <a href="/signin" style="padding-top: 8px; padding-bottom: 10px;"
+                            class="btn btn-outline-light mb-2">Login</a>
+                    </p>
+                    <% } %>
+        </div>
+        <%- include('./partials/script.ejs') %>
+</body>
+
+</html>
