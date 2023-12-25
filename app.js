@@ -9,11 +9,18 @@ const blogRouter = require("./routes/blog");
 const commentRouter = require("./routes/comment");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
-const { restrictToLoggedIn, checkAuth } = require("./middlewares/auth");
+const { checkAuth } = require("./middlewares/auth");
+const cloudinary = require("cloudinary").v2;
 const app = express();
 const PORT = process.env.PORT;
 
 connectMongoDB(process.env.MONGO_URL);
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

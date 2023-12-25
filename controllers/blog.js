@@ -1,6 +1,8 @@
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 const { User } = require("../models/user");
+const fs = require("fs");
+const uploadOnCloudinary = require("../service/cloudinary");
 
 async function handleBlogCreation(req, res) {
   const { title, body } = req.body;
@@ -9,11 +11,17 @@ async function handleBlogCreation(req, res) {
     if (!req.file || !req.file.filename) {
       throw new Error("Cover Image Is Required");
     }
-    const coverImage = req.file.filename;
+    const coverImagePath = req.file.path;
+    console.log(coverImagePath);
+    const res3 = await uploadOnCloudinary(coverImagePath);
+    console.log(res3);
+    fs.unlink(coverImagePath, (err) => {
+      if (err) console.log(err);
+    });
     const blog = await Blog.create({
       title,
       body,
-      coverImage: `/uploads/${coverImage}`,
+      coverImage: res3.url,
       developedBy: req.user.id,
     });
     return res.redirect(`/blog/${blog._id}`);

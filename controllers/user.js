@@ -1,4 +1,6 @@
 const { User } = require("../models/user");
+const uploadOnCloudinary = require("../service/cloudinary");
+const fs = require("fs");
 
 async function handleSignUp(req, res) {
   const { fullName, email, password } = req.body;
@@ -26,10 +28,14 @@ async function handleSignOut(req, res) {
 }
 
 async function handleProfileImage(req, res) {
-  await User.updateOne(
-    { _id: req.user.id },
-    { $set: { profileImageUrl: `/images/${req.file.filename}` } }
-  );
+  const cloudinaryResponse = await uploadOnCloudinary(req.file.path);
+  if (cloudinaryResponse) {
+    fs.unlinkSync(req.file.path);
+    await User.updateOne(
+      { _id: req.user.id },
+      { $set: { profileImageUrl: cloudinaryResponse.url } }
+    );
+  }
   return res.redirect("/");
 }
 
