@@ -13,7 +13,11 @@ async function handleSignIn(req, res) {
 
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
-    res.cookie("token", token);
+    const thirtyDaysInMilliseconds = 30 * 24 * 60 * 60 * 1000;
+    res.cookie("token", token, {
+      maxAge: thirtyDaysInMilliseconds,
+      httpOnly: true,
+    });
     return res.redirect("/");
   } catch (error) {
     console.error("Error:", error.message);
