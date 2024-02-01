@@ -13,7 +13,8 @@
         <div class="container mt-5">
             <% if (locals.blog) { %>
                 <div class="card mb-3 border border-success border-2">
-                    <img src="<%= blog.coverImage %>" class="card-img-top" alt="<%= blog.coverImage %>">
+                    <img src="<%= blog.coverImage %>" class="card-img-top" style="max-height: 730px; object-fit:cover;"
+                        alt="<%= blog.coverImage %>">
                     <div class="card-body">
                         <h5 class="card-title">
                             <%= blog.title %>
