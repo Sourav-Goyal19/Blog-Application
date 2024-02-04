@@ -12,7 +12,7 @@
             <h1 style="margin-bottom: 25px;">Blogs</h1>
             <% if (locals.blogs) { %>
                 <% blogs.forEach(blog=> { %>
-                    <div onclick="openBlog('<%=blog._id%>')" class="card mb-3 border border-warning border-2"
+                    <div onclick="openBlog('<%=blog._id%>')" class="card mb-3 border border-danger border-2"
                         style="cursor: pointer;">
                         <img style="max-height: 400px; object-fit: cover;" src="<%= blog.coverImage %>"
                             class="card-img-top" alt="<%= blog.coverImage %>">
