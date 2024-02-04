@@ -66,20 +66,6 @@
                         <% } %>
         </div>
         <%- include('./partials/script.ejs') %>
-            <script>
-                const commentInput = document.getElementsByTagName('textarea')[0];
-                function checkcommentLength() {
-                    const submitBtn = document.getElementById('commentbtn');
-                    if (commentInput.value.length <= 0) {
-                        submitBtn.disabled = true
-                    }
-                    else {
-                        submitBtn.disabled = false
-                    }
-                }
-                checkcommentLength();
-                commentInput.addEventListener('inputchange', checkcommentLength)
-            </script>
 </body>
 
 </html>
