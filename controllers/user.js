@@ -10,7 +10,6 @@ async function handleSignUp(req, res) {
 
 async function handleSignIn(req, res) {
   const { email, password } = req.body;
-
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
     const thirtyDaysInMilliseconds = 30 * 24 * 60 * 60 * 1000;

@@ -36,14 +36,11 @@ const userSchema = new Schema(
 userSchema.pre("save", function (next) {
   const user = this;
   console.log(user);
-  const salt = randomBytes(16).toString();
-  console.log(salt);
-  const hashedPassword = createHmac("sha256", salt)
-    .update(user.password)
-    .digest("hex");
-  console.log(hashedPassword);
-  this.salt = salt;
-  this.password = hashedPassword;
+  if (user.isModified("hashedPassword")) {
+    const salt = bcrypt.genSaltSync(6);
+    this.salt = salt;
+    this.hashedPassword = bcrypt.hashSync(this.hashedPassword, salt);
+  }
   next();
 });
 
