@@ -4,7 +4,7 @@ Welcome to the Blog Application! This web application allows users to create and
 
 ## Getting Started
 
-To access the Blog Application, simply visit [https://blogapplication.up.railway.app](https://blogapplication.up.railway.app) in your web browser.
+To access the Blog Application, simply visit [here](https://blog-application-i8kz.onrender.com) in your web browser.
 
 ## Features
 
