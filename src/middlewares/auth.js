@@ -1,4 +1,4 @@
-const { getUser } = require("../service/auth");
+const { getUser } = require("../services/auth");
 
 const restrictToLoggedIn = (req, res, next) => {
   const userToken = req.cookies?.token;

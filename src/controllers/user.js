@@ -1,5 +1,5 @@
 const { User } = require("../models/user");
-const uploadOnCloudinary = require("../service/cloudinary");
+const uploadOnCloudinary = require("../services/cloudinary");
 const fs = require("fs");
 
 async function handleSignUp(req, res) {

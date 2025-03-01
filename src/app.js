@@ -55,4 +55,6 @@ app.use("/user", upload2.single("profileImageUrl"), userRouter);
 app.use("/blog", upload.single("coverImage"), blogRouter);
 app.use("/comment", commentRouter);
 
+app.get("/health", (req, res) => res.json({ msg: "Working well" }).status(200));
+
 app.listen(PORT, () => console.log("Server Started at port:", PORT));

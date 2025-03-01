@@ -2,7 +2,7 @@ const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 const { User } = require("../models/user");
 const fs = require("fs");
-const uploadOnCloudinary = require("../service/cloudinary");
+const uploadOnCloudinary = require("../services/cloudinary");
 
 async function handleBlogCreation(req, res) {
   const { title, body } = req.body;
