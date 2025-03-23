@@ -44,7 +44,7 @@ const upload = multer({ storage: storage });
 const upload2 = multer({ storage: secondStorage });
 
 app.set("view engine", "ejs");
-app.set("views", path.resolve("./views"));
+app.set("views", path.resolve(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
